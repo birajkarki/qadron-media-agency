@@ -11,43 +11,49 @@ const Navbar = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
 
+  const handleMobileMenu = () => {
+    setOpenMobileMenu(!openMobileMenu);
+  };
+
   useEffect(() => {
     if (openMobileMenu) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflowY = "hidden";
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflowY = "auto";
     }
   }, [openMobileMenu]);
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 0) {
         setIsScrolling(true);
       } else {
         setIsScrolling(false);
       }
     };
+
     window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const handleMobileMenu = () => {
-    setOpenMobileMenu(!openMobileMenu);
-  };
+
   return (
     <nav
       className={`py-2 w-full ${
         isScrolling ? "fixed top-0 bg-white shadow-lg z-10" : "relative"
       }`}
     >
-      <div className="w-[89%] m-auto max-w-[1400px] flex justify-between items-center ">
-        <a href="/">
-          <h1 className="text-3xl font-bold text-primary"> Qadron Media</h1>
+      <div className="w-[89%] m-auto max-w-[1400px] flex justify-between items-center">
+        <a href="">
+          <h1 className="text-3xl font-bold text-[#FFAFCC]">IMAGINE</h1>
         </a>
+
         <ul
-          className={`md:flex items-center gap-8 md:static absolute text-gray-600 ${
+          className={`md:flex items-center gap-8 md:static absolute text-gray-600  ${
             openMobileMenu
-              ? "top-12 py-4 w-full bg-primary left-0 text-center space-y-10 text-white drop-shadow-lg z-20"
+              ? "top-12 py-4 w-full bg-[#FFAFCC] left-0 text-center space-y-10 text-white drop-shadow-lg z-20"
               : "hidden"
           }`}
         >
@@ -72,29 +78,21 @@ const Navbar = () => {
             </a>
           </li>
         </ul>
-        <div className="flex gap-3 text-white items-center ml-auto md:ml-0">
-          <div
-            className="bg-primary p-1 rounded-full hover:translate-y-[-2px]
-           transition-all cursor-pointer"
-          >
-            <AiFillFacebook />
+
+        <div className="flex gap-4 text-white items-center ml-auto md:ml-0">
+          <div className="bg-[#FFAFCC] p-1 rounded-full hover:translate-y-[-2px] transition-all">
+            <AiFillFacebook size={18} />
           </div>
-          <div
-            className="bg-primary p-1 rounded-full hover:translate-y-[-2px]
-           transition-all cursor-pointer"
-          >
-            <AiOutlineTwitter />
+          <div className="bg-[#FFAFCC] p-1 rounded-full hover:translate-y-[-2px] transition-all">
+            <AiFillInstagram size={18} />
           </div>
-          <div
-            className="bg-primary p-1 rounded-full hover:translate-y-[-2px]
-           transition-all cursor-pointer"
-          >
-            <AiFillInstagram />
+          <div className="bg-[#FFAFCC] p-1 rounded-full hover:translate-y-[-2px] transition-all">
+            <AiOutlineTwitter size={18} />
           </div>
         </div>
 
         <div className="md:hidden ml-4" onClick={handleMobileMenu}>
-          {!openMobileMenu ? <FiMenu /> : <MdClose />}{" "}
+          {!openMobileMenu ? <FiMenu size={25} /> : <MdClose size={25} />}
         </div>
       </div>
     </nav>
